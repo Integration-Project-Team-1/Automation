@@ -11,11 +11,11 @@
 # - maakt de folders en permissions aan voor het project
 
 # Imports
-source ./data/consts.sh
-source ./lib/log.sh
-source ./lib/groups.sh
-source ./lib/users.sh
-source ./lib/auth.sh
+source data/consts.sh
+source lib/auth.sh
+source lib/log.sh
+source lib/groups.sh
+source lib/users.sh
 
 # Help function
 show_help() {
@@ -76,15 +76,15 @@ case "$action" in
                 ;;
             "usergroups")
                 # Voeg gebruikers toe aan groep hun groep.
-                check_and_add_users_to_group "$pm_group}" "$log_file" "${pm_users[@]}"
-                check_and_add_users_to_group "$crm_group}" "$log_file" "${crm_users[@]}"
+                check_and_add_users_to_group "$pm_group" "$log_file" "${pm_users[@]}"
+                check_and_add_users_to_group "$crm_group" "$log_file" "${crm_users[@]}"
                 check_and_add_users_to_group "$frontend_group" "$log_file" "${frontend_users[@]}"
                 check_and_add_users_to_group "$planning_group" "$log_file" "${planning_users[@]}"
-                check_and_add_users_to_group "$facturatie_group}" "$log_file" "${facturatie_users[@]}"
-                check_and_add_users_to_group "$monitoring_group}" "$log_file" "${monitoring_users[@]}"
-                check_and_add_users_to_group "$mailing_group}" "$log_file" "${mailing_users[@]}"
+                check_and_add_users_to_group "$facturatie_group" "$log_file" "${facturatie_users[@]}"
+                check_and_add_users_to_group "$monitoring_group" "$log_file" "${monitoring_users[@]}"
+                check_and_add_users_to_group "$mailing_group" "$log_file" "${mailing_users[@]}"
                 check_and_add_users_to_group "$ads_group" "$log_file" "${ads_users[@]}"
-                check_and_add_users_to_group "$kassa_group}" "$log_file" "${kassa_users[@]}"
+                check_and_add_users_to_group "$kassa_group" "$log_file" "${kassa_users[@]}"
                 ;;
             "shell")
                  # Verander de huidige default shell naar de gedefinieerde default shell.

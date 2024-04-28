@@ -2,7 +2,7 @@
 #
 # Dit lib script definieert logica voor het beheren van groepen.
 
-source log.sh
+source ./lib/log.sh
 
 # Controleerd of groepen bestaan op het systeem.
 # Maakt groepen aan en schrijft berichten.
