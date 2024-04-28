@@ -2,7 +2,7 @@
 #
 # Dit lib script bevat logica om gebruikers te beheren.
 
-source log.sh
+source ./lib/log.sh
 
 # Maakt nieuwe gebruikers aan.
 #

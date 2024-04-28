@@ -41,15 +41,15 @@ declare -a project_groups=(
 	"$ads_group"
 )
 
-# Combinatie van alle gebruikers in één lijst
+# Combinatie van alle gebruikers in één lijst.
 declare -a project_users=(
-"${pm_users[@]}"
-"${crm_users[@]}"
-"${frontend_users[@]}"
-"${facturatie_users[@]}"
-"${ads_users[@]}"
-"${mailing_users[@]}"
-"${kassa_users[@]}"
-"${monitoring_users[@]}"
-"${planning_users[@]}"
+	"${pm_users[@]}"
+	"${crm_users[@]}"
+	"${frontend_users[@]}"
+	"${facturatie_users[@]}"
+	"${ads_users[@]}"
+	"${mailing_users[@]}"
+	"${kassa_users[@]}"
+	"${monitoring_users[@]}"
+	"${planning_users[@]}"
 )
