@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/bin/bash
 #
 # Dit lib script definieert logica voor het beheren van groepen.
 

@@ -4,7 +4,6 @@
 
 source log.sh
 
-
 # Maakt nieuwe gebruikers aan.
 #
 # arg1: log_file; Een pad naar een bestand om naar te loggen.
