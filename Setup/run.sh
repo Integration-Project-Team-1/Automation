@@ -1,3 +1,18 @@
+#!/bin/bash
+#
+# Dit script dient voor voor het klaarmaken van een linux server (momenteel Ubuntu) voor het Integration Project.
+#
+# Het script is flexibel en prompt steeds de gebruiker of die specifieke stap uitgevoerd moet worden.
+# Met optie "all aA) [Aa][lL][lL]" kan je steeds te stappen uitvoeren voor alle groepen en users om teveel prompts te voorkomen.
+#
+# Functionaliteit van het Script
+# Elke stap is optioneel tenzij het afhangt van een andere geannuleerde stap
+# - maakt de nodige groepen aan
+# - maakt de users
+# - voegt de users toe aan de juiste groepen
+# - veranderd de default shell voor users
+# - maakt de folders voor het project aan
+
 source ./data/consts.sh
 source ./lib/setup_groups.sh
 source ./lib/create_users.sh

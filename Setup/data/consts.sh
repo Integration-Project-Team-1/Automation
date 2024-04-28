@@ -1,15 +1,19 @@
-# Declaratie van groepen
-declare pm_groep=("pm_groep")
-declare crm_groep=("crm_groep")
-declare frontend_groep=("frontend_groep")
-declare planning_groep=("planning_groep")
-declare facturatie_groep=("facturatie_groep")
-declare kassa_groep=("kassa_groep")
-declare monitoring_groep=("monitoring_groep")
-declare mailing_groep=("mailing_groep")
-declare ads_groep=("ads_groep")
+#!/bin/bash
+#
+# Dit bestand definieert groepen en gebruikers en functies om deze af te drukken.
 
-# Declaratie van lijsten met gebruikers per groep
+# Declaratie van de groepen voor elke service
+declare -a pm_groep=("pm_groep")
+declare -a crm_groep=("crm_groep")
+declare -a frontend_groep=("frontend_groep")
+declare -a planning_groep=("planning_groep")
+declare -a facturatie_groep=("facturatie_groep")
+declare -a kassa_groep=("kassa_groep")
+declare -a monitoring_groep=("monitoring_groep")
+declare -a mailing_groep=("mailing_groep")
+declare -a ads_groep=("ads_groep")
+
+# Lijsten met gebruikers per groep
 declare -a pm_users=("thuy" "killian")
 declare -a crm_users=("ismael" "soufiane" "soufian" "hamza")
 declare -a frontend_users=("kristian" "amina" "nour" "nawfel")
@@ -55,4 +59,3 @@ print_all_groups() {
 print_all_users() {
 	echo "Alle gebruikers: ${all_users[@]}"
 }
-
