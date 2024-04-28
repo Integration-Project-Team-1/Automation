@@ -5,10 +5,12 @@
 # Voor system logs zie:
 # /var/log/
 
-log_file="./log.txt"
-
+# Logt een bericht
+# param1: log_file: het pad naar de log file
+# param2: message: het bericht
 write_log() {
-    local message="$1"
+    local log_file="$1"
+    local message="$2"
     local timestamp
     # Voeg tijdsvermelding en gebruiker toe aan het bericht.
     timestamp=$(date +"%Y - %m -%d %T")
@@ -18,8 +20,12 @@ write_log() {
     echo -e "$formatted_message" >> "$log_file"
 }
 
+# Print een bericht en logt naar een file
+# param1: log_file: het pad naar de log file
+# param2: message: het bericht
 print_and_log() {
-    local msg="$1"
-    write_log "$msg"
-    echo -e "$msg"
+    local log_file="$1"
+    local message="$2"
+    write_log "$log_file" "$message"
+    echo -e "$message"
 }

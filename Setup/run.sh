@@ -2,69 +2,110 @@
 #
 # Dit script dient voor voor het klaarmaken van een linux server (momenteel Ubuntu) voor het Integration Project.
 #
-# Het script is flexibel en prompt steeds de gebruiker of die specifieke stap uitgevoerd moet worden.
-# Met optie "all aA) [Aa][lL][lL]" kan je steeds te stappen uitvoeren voor alle groepen en users om teveel prompts te voorkomen.
-#
 # Functionaliteit van het Script
 # Elke stap is optioneel tenzij het afhangt van een andere geannuleerde stap
 # - maakt de nodige groepen aan
-# - maakt de users
-# - voegt de users toe aan de juiste groepen
-# - veranderd de default shell voor users
-# - maakt de folders voor het project aan
+# - maakt de gebruikers
+# - voegt de gebruikers toe aan de juiste groepen
+# - veranderd de default shell voor gebruikers
+# - maakt de folders en permissions aan voor het project
 
+# Imports
 source ./data/consts.sh
-source ./lib/setup_groups.sh
-source ./lib/create_users.sh
-source ./lib/add_users_to_groups.sh
-source ./lib/change_passwords.sh
-source ./lib/change_shell.sh
+source ./lib/log.sh
+source ./lib/groups.sh
+source ./lib/users.sh
+source ./lib/auth.sh
 
-# Maak de benodigde groepen
-setup_groups
+# Help function
+show_help() {
+    echo "Usage: $0 <action> <target>"
+    echo "Arguments:"
+    echo "  <action>  : The action to perform. Valid actions: set"
+    echo "  <target>  : The target for the action. Valid targets: users, passwords, groups, usergroups, shell"
+    echo "Example: $0 set users"
+    exit 0
+}
 
-# Maak de users voor elke groep
-create_users "${pm_users[@]}"
-create_users "${kassa_users[@]}"
-create_users "${frontend_users[@]}"
-create_users "${facturatie_users[@]}"
-create_users "${ads_users[@]}"
-# adds en mailing zijn dezelfde groep
-# create_users "${mailing_users[@]}" Dezelde users als adds
-create_users "${crm_users[@]}"
-create_users "${monitoring_users[@]}"
-create_users "${planning_users[@]}"
+# Controleer of de help optie is aangeduid
+if [ "$#" -eq 1 ] && [ "$1" = "help" ]; then
+    show_help
+fi
 
-# Voeg users toe aan groep
-add_users_to_groups "${pm_groep[0]}" "${pm_users[@]}"
-add_users_to_groups "${crm_groep[0]}" "${crm_users[@]}"
-add_users_to_groups "${frontend_groep[0]}" "${frontend_users[@]}"
-add_users_to_groups "${planning_groep[0]}" "${planning_users[@]}"
-add_users_to_groups "${facturatie_groep[0]}" "${facturatie_users[@]}"
-add_users_to_groups "${monitoring_groep[0]}" "${monitoring_users[@]}"
-add_users_to_groups "${mailing_groep[0]}" "${mailing_users[@]}"
-add_users_to_groups "${ads_groep[0]}" "${ads_users[@]}"
-add_users_to_groups "${kassa_groep[0]}" "${kassa_users[@]}"
+# Controleer de argumenten
+if [ "$#" -ne 2 ]; then
+    echo "Usage: $0 <action> <target>"
+    echo "Usage: $0 help"
+    exit 1
+fi
 
-# Zet het default passwoord voor iedereen
-change_passwords "${pm_users[@]}"
-change_passwords "${crm_users[@]}"
-change_passwords "${frontend_users[@]}"
-change_passwords "${planning_users[@]}"
-change_passwords "${facturatie_users[@]}"
-change_passwords "${monitoring_users[@]}"
-change_passwords "${mailing_users[@]}"
-change_passwords "${ads_users[@]}"
-change_passwords "${kassa_users[@]}"
+action="$1"
+target="$2"
 
-
-# Verander de default shell naar /bin/bash voor iedereen die /bin/sh als default heeft.
-change_shell "${pm_users[@]}"
-change_shell "${crm_users[@]}"
-change_shell "${frontend_users[@]}"
-change_shell "${planning_users[@]}"
-change_shell "${facturatie_users[@]}"
-change_shell "${monitoring_users[@]}"
-change_shell "${mailing_users[@]}"
-change_shell "${ads_users[@]}"
-change_shell "${kassa_users[@]}"
+case "$action" in
+    "set")
+        case "$target" in
+            "users")
+                # Maak de gebruikers van elk team.
+                create_users "$log_file" "${pm_users[@]}"
+                create_users "$log_file" "${kassa_users[@]}"
+                create_users "$log_file" "${frontend_users[@]}"
+                create_users "$log_file" "${facturatie_users[@]}"
+                create_users "$log_file" "${ads_users[@]}"
+                # adds en mailing zijn dezelfde groep
+                # create_users "$log_file" "${mailing_users[@]}". Zijn dezelde users als adds.
+                create_users "$log_file" "${crm_users[@]}"
+                create_users "$log_file" "${monitoring_users[@]}"
+                create_users "$log_file" "${planning_users[@]}"
+                ;;
+            "passwords")
+                # Verander de passwoorden naar de default.
+                change_passwords "$default_password" "$log_file" "${pm_users[@]}"
+                change_passwords "$default_password" "$log_file" "${crm_users[@]}"
+                change_passwords "$default_password" "$log_file" "${frontend_users[@]}"
+                change_passwords "$default_password" "$log_file" "${planning_users[@]}"
+                change_passwords "$default_password" "$log_file" "${facturatie_users[@]}"
+                change_passwords "$default_password" "$log_file" "${monitoring_users[@]}"
+                change_passwords "$default_password" "$log_file" "${mailing_users[@]}"
+                change_passwords "$default_password" "$log_file" "${ads_users[@]}"
+                change_passwords "$default_password" "$log_file" "${kassa_users[@]}"
+                ;;
+            "groups")
+                # Maak de benodigde groepen
+                check_and_create_groups "$log_file" "${project_groups[@]}"
+                ;;
+            "usergroups")
+                # Voeg gebruikers toe aan groep hun groep.
+                check_and_add_users_to_group "$pm_group}" "$log_file" "${pm_users[@]}"
+                check_and_add_users_to_group "$crm_group}" "$log_file" "${crm_users[@]}"
+                check_and_add_users_to_group "$frontend_group" "$log_file" "${frontend_users[@]}"
+                check_and_add_users_to_group "$planning_group" "$log_file" "${planning_users[@]}"
+                check_and_add_users_to_group "$facturatie_group}" "$log_file" "${facturatie_users[@]}"
+                check_and_add_users_to_group "$monitoring_group}" "$log_file" "${monitoring_users[@]}"
+                check_and_add_users_to_group "$mailing_group}" "$log_file" "${mailing_users[@]}"
+                check_and_add_users_to_group "$ads_group" "$log_file" "${ads_users[@]}"
+                check_and_add_users_to_group "$kassa_group}" "$log_file" "${kassa_users[@]}"
+                ;;
+            "shell")
+                 # Verander de huidige default shell naar de gedefinieerde default shell.
+                 change_shell "$default_shell" "$log_file" "${pm_users[@]}"
+                 change_shell "$default_shell" "$log_file" "${crm_users[@]}"
+                 change_shell "$default_shell" "$log_file" "${frontend_users[@]}"
+                 change_shell "$default_shell" "$log_file" "${planning_users[@]}"
+                 change_shell "$default_shell" "$log_file" "${facturatie_users[@]}"
+                 change_shell "$default_shell" "$log_file" "${monitoring_users[@]}"
+                 change_shell "$default_shell" "$log_file" "${mailing_users[@]}"
+                 change_shell "$default_shell" "$log_file" "${ads_users[@]}"
+                 change_shell "$default_shell" "$log_file" "${kassa_users[@]}"
+                 ;;
+            *)
+                echo -e "\e[33Invalid action: '$action'\e[0m"
+                exit 1
+                ;;
+            esac
+        ;;
+    *)
+        echo -e "\e[33Invalid action: '$action'\e[0m"
+        exit 1
+        ;;
+esac

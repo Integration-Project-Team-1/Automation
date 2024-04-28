@@ -2,16 +2,20 @@
 #
 # Dit bestand definieert groepen en gebruikers en functies om deze af te drukken.
 
+declare log_file="../log.txt"
+declare default_shell="/bin/bash"
+declare default_password="student1"
+
 # Declaratie van de groepen voor elke service
-declare -a pm_groep=("pm_groep")
-declare -a crm_groep=("crm_groep")
-declare -a frontend_groep=("frontend_groep")
-declare -a planning_groep=("planning_groep")
-declare -a facturatie_groep=("facturatie_groep")
-declare -a kassa_groep=("kassa_groep")
-declare -a monitoring_groep=("monitoring_groep")
-declare -a mailing_groep=("mailing_groep")
-declare -a ads_groep=("ads_groep")
+declare pm_group="pm_groep"
+declare crm_group="crm_groep"
+declare frontend_group="frontend_groep"
+declare planning_group="planning_groep"
+declare facturatie_group="facturatie_groep"
+declare kassa_group="kassa_groep"
+declare monitoring_group="monitoring_groep"
+declare mailing_group="mailing_groep"
+declare ads_group="ads_groep"
 
 # Lijsten met gebruikers per groep
 declare -a pm_users=("thuy" "killian")
@@ -25,20 +29,20 @@ declare -a monitoring_users=("bryana" "dk_lucas" "jarno")
 declare -a planning_users=("simon" "rand" "mohamed")
 
 # Combinatie van alle groepen in één array
-declare -a all_groups=(
-"${pm_groep[@]}"
-"${crm_groep[@]}"
-"${frontend_groep[@]}"
-"${planning_groep[@]}"
-"${facturatie_groep[@]}"
-"${kassa_groep[@]}"
-"${monitoring_groep[@]}"
-"${mailing_groep[@]}"
-"${ads_groep[@]}"
+declare -a project_groups=(
+	"$pm_group"
+	"$crm_group"
+	"$frontend_group"
+	"$planning_group"
+	"$facturatie_group"
+	"$kassa_group"
+	"$monitoring_group"
+	"$mailing_group"
+	"$ads_group"
 )
 
 # Combinatie van alle gebruikers in één lijst
-declare -a all_users=(
+declare -a project_users=(
 "${pm_users[@]}"
 "${crm_users[@]}"
 "${frontend_users[@]}"
@@ -49,13 +53,3 @@ declare -a all_users=(
 "${monitoring_users[@]}"
 "${planning_users[@]}"
 )
-
-# Afdrukken van alle groepen
-print_all_groups() {
-	echo "Alle groepen: ${all_groups[@]}"
-}
-
-# Afdrukken van alle gebruikers
-print_all_users() {
-	echo "Alle gebruikers: ${all_users[@]}"
-}

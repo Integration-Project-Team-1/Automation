@@ -1,0 +1,11 @@
+[2024 - 04 -28 10:12:37] : fuser - Changing default shell to /usr/bin/zsh for users: 
+[2024 - 04 -28 10:13:10] : fuser - Changing default shell to /usr/bin/zsh for users: 
+[2024 - 04 -28 10:13:53] : fuser - Changing default shell to /usr/bin/zsh for users: 
+[2024 - 04 -28 10:14:41] : fuser - Changing default shell to /usr/bin/zsh for users: fuser
+[2024 - 04 -28 10:14:41] : fuser - [32m/usr/bin/zsh is already the default shell for user: fuser. Skipping..[0m
+[2024 - 04 -28 10:15:06] : fuser - Changing default shell to /bin/bash for users: fuser
+[2024 - 04 -28 10:15:28] : fuser - [32mChanged shell from /usr/bin/zsh to /bin/bash for user: fuser[0m
+[2024 - 04 -28 10:18:21] : fuser - Changing default shell to /bin/bash for users: fuser
+[2024 - 04 -28 10:18:41] : fuser - [31mCould not change /usr/bin/zsh to /bin/bash for user: fuser[0m
+[2024 - 04 -28 10:19:05] : fuser - Changing default shell to /bin/bash for users: fuser
+[2024 - 04 -28 10:19:12] : fuser - [31mCould not change /usr/bin/zsh to /bin/bash for user: fuser[0m
