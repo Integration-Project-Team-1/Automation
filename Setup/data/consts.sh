@@ -24,7 +24,7 @@ declare -a frontend_users=("kristian" "amina" "nour" "nawfel")
 declare -a facturatie_users=("carl" "batuhan" "caelan" "mouise")
 declare -a ads_users=("bryan" "w_lucas" "koen" "dries")
 declare -a mailing_users=("bryan" "w_lucas" "koen" "dries")
-declare -a kassa_users=("luca" "abdellilah" "yasmine" "jurgen")
+declare -a kassa_users=("luca" "abdelillah" "yasmine" "jurgen")
 declare -a monitoring_users=("bryana" "dk_lucas" "jarno")
 declare -a planning_users=("simon" "rand" "mohamed")
 
