@@ -85,6 +85,18 @@ case "$action" in
                 check_and_add_users_to_group "$mailing_group" "$log_file" "${mailing_users[@]}"
                 check_and_add_users_to_group "$ads_group" "$log_file" "${ads_users[@]}"
                 check_and_add_users_to_group "$kassa_group" "$log_file" "${kassa_users[@]}"
+                # Add users to their general group
+		for group in "${general_groups[@]}"; do
+                	check_and_add_users_to_group "$group" "$log_file" "${pm_users[@]}"
+                	check_and_add_users_to_group "$group" "$log_file" "${crm_users[@]}"
+                	check_and_add_users_to_group "$group" "$log_file" "${frontend_users[@]}"
+                	check_and_add_users_to_group "$group" "$log_file" "${planning_users[@]}"
+                	check_and_add_users_to_group "$group" "$log_file" "${facturatie_users[@]}"
+                	check_and_add_users_to_group "$group" "$log_file" "${monitoring_users[@]}"
+                	check_and_add_users_to_group "$group" "$log_file" "${mailing_users[@]}"
+                	check_and_add_users_to_group "$group" "$log_file" "${ads_users[@]}"
+                	check_and_add_users_to_group "$group" "$log_file" "${kassa_users[@]}"
+		done
                 ;;
             "shell")
                  # Verander de huidige default shell naar de gedefinieerde default shell.

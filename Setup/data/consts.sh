@@ -17,6 +17,8 @@ declare monitoring_group="monitoring_groep"
 declare mailing_group="mailing_groep"
 declare ads_group="ads_groep"
 
+declare -a general_groups=("docker" "student")
+
 # Lijsten met gebruikers per groep
 declare -a pm_users=("thuy" "killian")
 declare -a crm_users=("ismael" "soufiane" "soufian" "hamza")
