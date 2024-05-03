@@ -26,8 +26,8 @@ check_and_create_groups() {
 		sudo groupadd "$group"
 		# Controleer of de groep is aangemaakt
 		if getent group "$group" >/dev/null; then
-			print_and_log "$log_file" "\e[32mGroup '$group' created\e.[0m"
-			return
+			print_and_log "$log_file" "\e[32mGroup '$group' created\e[0m."
+			continue
 		fi
 		# Schrijf een bericht indien de groep niet aangemaakt is.
 		print_and_log "\e[31mCould not create Group: $group\e[0m"
