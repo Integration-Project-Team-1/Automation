@@ -78,7 +78,7 @@ change_shell() {
 	local current_shell
 
 	# Start bericht
-	print_and_log "$log_file" "Changing default shell to $new_shell for user(s): ${users[*]}"
+	print_and_log "$log_file" "Checking to change the default shell to $new_shell for user(s): ${users[*]}"
 
 	for user in "${users[@]}"
 	do
@@ -97,7 +97,7 @@ change_shell() {
 			# Verander de default shell
 			sudo chsh -s "$new_shell" "$user"
 			current_shell=$(getent passwd "$user" | cut -d: -f7)
-			if [ "$current_shell" == "$new_shell" ]; then
+			if [ "$current_shell" != "$new_shell" ]; then
 				print_and_log "$log_file" "\e[32mChanged shell from $current_shell to $new_shell for user: $user\e[0m"
 				continue
 			fi
